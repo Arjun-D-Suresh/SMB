@@ -1,0 +1,16 @@
+body.en {
+    font-size: 15px;
+}
+
+/* custom css*/
+.fixTableHead {
+    overflow-y: auto;
+    height: 110px;
+}
+.fixTableHead thead th {
+    position: sticky;
+    top: 0;
+    background: #695800;
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+}

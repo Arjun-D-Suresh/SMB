@@ -1,0 +1,46 @@
+FrontEnd: Laravel
+Data Processing: Flask API
+DB: MySQl
+
+
+Hosting Details:
+****************
+
+Laravel: GoDaddy
+DB: GoDaddy
+CronJob: GoDaddy
+Flask API: AWS
+
+
+Credentials:
+************
+
+GoDaddy:
+--------
+Server Link: http://68.178.164.50/cpanel
+User Name: srikanth2k23
+Password: Golden2K@23
+
+AWS:
+----
+Root User Name: iepfhostii@gmail.com
+Password: Iepf@123
+
+Gmail:
+------
+Email ID: iepfhostii@gmail.com
+Password: Iepf@123
+
+FTP Details:
+------------
+Host Name: 68.178.164.50
+User Name: ftpuser@ajaysrikanth.com
+Password: IepfFtp2023
+
+MySQL:
+------
+Host Name: 68.178.164.50
+Port: 3306
+UserName: root
+Password: H#vhNjXZtbiY
+
