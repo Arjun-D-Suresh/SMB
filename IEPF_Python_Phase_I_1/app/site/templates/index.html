@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>IEPF2 API</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script>
+      $(document).ready(function(){
+
+        $("#submitButton").click(function(){
+          $(this).html(`<div class="spinner-border text-light spinner-border-sm" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>`)
+          $(this).prop("disabled",true);
+          console.log($('#fileUploadForm')[0]);
+          var form = new FormData($('#fileUploadForm')[0]);
+          $.ajax({
+              type: 'POST',
+              url: '{{url_for("api.upload_file")}}',
+              data: form,
+              contentType: false,
+              cache: false,
+              processData: false,
+              success: function(data) {
+                $('#submitButton').prop("disabled",false);
+                $('#submitButton').html('Submit');
+                $('#fileUploadForm').trigger("reset");
+                $('#ErrorMsg').hide();
+                $('#SuccessMsg').fadeIn();
+                console.log('Success!', data);
+                setTimeout(()=>$('#SuccessMsg').fadeOut(),3000);
+              },
+              error: function(data) {
+                $('#submitButton').prop("disabled",false);
+                $('#submitButton').html('Submit');
+                $('#SuccessMsg').hide();
+                $('#ErrorMsg').fadeIn();
+                console.log('Error!', data);
+                setTimeout(()=>$('#ErrorMsg').fadeOut(),3000);
+              },
+          });
+        });
+      });
+      </script>
+  </head>
+  <body>
+      <div class="position-relative">
+        <div class="container mt-3 position-absolute start-50 w-50 translate-middle-x p-3">
+          <h2>FILE UPLOAD</h2>
+          <form id="fileUploadForm" action="/api/uploader" method=post enctype=multipart/form-data>
+            <div class="mb-3 mt-3">
+              <select class="form-control" name="fileType" placeholder="file type" id="fileType" required>
+                <option value="IEPF2">IEPF2</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input id="file" type="file" class="form-control" placeholder="import files" name="file" multiple required>
+            </div>
+            <div class="position-relative">
+              <button id="submitButton" type="button" class="btn btn-primary position-relative start-50 translate-middle-x">Submit</button>
+            </div>
+            <div id="SuccessMsg" class="alert alert-success mt-3" role="alert" style="display: none;">
+              File uploaded successfully
+            </div>
+            <div id="ErrorMsg" class="alert alert-danger mt-3" role="alert" style="display: none;">
+              Something went wrong!
+            </div>
+          </form>
+        </div>
+      </div>
+  </body>
+</html>
